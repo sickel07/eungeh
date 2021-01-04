@@ -36,5 +36,18 @@
 <form method="POST" th:action="@{/post}">
     <input type="hidden" value="test" />
 </form>
+
+<hr />
+
+<h4>Edit</h4>
+<form method="POST" th:action="@{/edit}">
+    <label for="title">Title:</label>
+    <br>
+    <input type="text" name="title" size="50" /><br />
+    <label for="content">Content:</label>
+    <br>
+    <input type="text" name="content" size="50" /><br />
+    <input type="submit" value="Commit" />
+</form>
 </body>
 </html>
