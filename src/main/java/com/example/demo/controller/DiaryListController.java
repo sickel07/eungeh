@@ -53,4 +53,10 @@ public class DiaryListController {
     public String move() {
         return "main/write";
     }
+    
+        @RequestMapping("/edit")
+    public String editList(@PathVariable("no") Long no)
+    {
+        return "redirect:/";
+    }
 }
