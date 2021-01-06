@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.demo.Diary;
 import com.example.demo.DiaryListRepository;
 import lombok.AllArgsConstructor;
@@ -48,10 +49,21 @@ public class DiaryListController {
         return "redirect:/";
     }
 
-    @RequestMapping("/edit")
-    public String editList(@PathVariable("no") Long no)
+    @RequestMapping("/edit/{no}")
+    public String editList(@PathVariable("no") Long no, Model model)
     {
+        Diary diary = diaryListRepository.getOne(no);
 
+        model.addAttribute("diary", diary);
+        return "main/write";
+    }
+
+    @RequestMapping("/update")
+    public String updateList(Diary diary)
+    {
+        System.out.println(diary.getContent());
+        diary.setUser(user);
+        diaryListRepository.save(diary);
         return "redirect:/";
     }
 
