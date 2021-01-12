@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>Boad</title>
 </head>
-<body>
 <h2>List</h2>
 <div th:unless="${#lists.isEmpty(diarys)}">
     <dl th:each="diary : ${diarys}">
@@ -17,7 +16,6 @@
             <form th:method="delete" th:action="@{'/posts/' + ${diary.id}}">
                 <input type="submit" value="delete" >
             </form>
-
         </dd>
     </dl>
 </div>
@@ -25,7 +23,7 @@
 <hr />
 
 <h3>Write</h3>
-<form method="POST" th:action="@{/save}">
+<form th:method="post" th:action="@{/save}">
     <label name="title">Title:</label>
     <br>
     <input type="text" name="title" size="50" /><br />
@@ -34,8 +32,8 @@
     <input type="text" name="content" size="50" /><br />
     <input type="submit" value="Save" />
 </form>
-<form method="POST" th:action="@{/test}">
-    <input type="submit" value="test" />
+<form  th:method="get" th:action="@{/db}">
+    <input type="submit" value="DB" />
 </form>
 </body>
 </html>

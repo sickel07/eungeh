@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import java.sql.*;
 import java.util.List;
 
+import com.example.demo.ConnectDB;
 import com.example.demo.Diary;
 import com.example.demo.DiaryListRepository;
 import org.springframework.stereotype.Controller;
@@ -16,14 +18,13 @@ public class DiaryListController {
 
     private DiaryListRepository diaryListRepository;
 
-    //@Autowired
     public DiaryListController(DiaryListRepository diaryListRepository) {
         this.diaryListRepository = diaryListRepository;
     }
 
-    //@RequestMapping(method= RequestMethod.GET)
     @RequestMapping("/")
     public String usersDiarys(Model model) {
+
         List<Diary> diaryList = diaryListRepository.findByUser(user);
         if (diaryList != null) {
             model.addAttribute("diarys", diaryList);
@@ -58,6 +59,26 @@ public class DiaryListController {
     @DeleteMapping("/posts/{no}")
     public String deleteList(@PathVariable("no") Long no) {
         diaryListRepository.delete(diaryListRepository.getOne(no));
+        return "redirect:/";
+    }
+
+    @GetMapping("/db")
+    public String DBTest() throws SQLException, ClassNotFoundException {
+        Connection con = ConnectDB.Connect();
+
+        String sqltext = "select * from TB_USER where UR_ID = 'admin'";
+
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sqltext);
+
+        while (rs.next())
+        {
+            String id = rs.getString("UR_ID");
+            String name = rs.getString("UR_NM");
+
+            System.out.println(id +" "+ name);
+        }
+
         return "redirect:/";
     }
 }
