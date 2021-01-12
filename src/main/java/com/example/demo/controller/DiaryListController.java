@@ -55,17 +55,9 @@ public class DiaryListController {
         return "redirect:/";
     }
 
-    @RequestMapping("/delete/{no}")
+    @DeleteMapping("/posts/{no}")
     public String deleteList(@PathVariable("no") Long no) {
         diaryListRepository.delete(diaryListRepository.getOne(no));
         return "redirect:/";
     }
-
-    /*
-    @GetMapping("/posts/delete}")
-    public String deleteList() {
-        //diaryListRepository.delete(diary);
-        return "redirect:/";
-    }
-    */
 }

@@ -11,8 +11,13 @@
         <dd>
             <span th:if="${diary.title}" th:text="${diary.title}">Title</span>
             <span th:if="${diary.content}" th:text="${diary.content}">Content</span>
-            <a th:text="edit" th:href="@{'/posts/' + ${diary.id}}" />
-            <a th:text="delete" th:href="@{'/delete/' + ${diary.id}}"/>
+            <form th:method="get" th:action="@{'/posts/' + ${diary.id}}">
+                <input type="submit" value="edit" >
+            </form>
+            <form th:method="delete" th:action="@{'/posts/' + ${diary.id}}">
+                <input type="submit" value="delete" >
+            </form>
+
         </dd>
     </dl>
 </div>
