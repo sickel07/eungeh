@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form method="POST" th:action="@{/update}">
+<form th:method="put" th:action="@{'/posts/' + ${diary.id}}">
     <label for="title">Title:</label>
     <input type="hidden" name="id" th:value="${diary.id}" size="50" />
     <input type="hidden" name="user" th:value="${diary.user}" size="50" />
